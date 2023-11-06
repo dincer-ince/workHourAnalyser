@@ -1,0 +1,34 @@
+<mat-card style="margin-bottom: 20px">
+  <div *ngFor="let day of week.workDays">
+    <app-day [day]="day"></app-day>
+  </div>
+  <mat-divider style="margin-top: 5px; margin-bottom: 10px"></mat-divider>
+  <div style="display: flex; gap: 40px" *ngIf="(requiredMinutes | async) as requiredMinutes">
+    <p
+      style="
+        color: rgba(255, 255, 255, 0.7);
+        margin-left: 10px;
+        font-size: 1.2rem;
+      "
+    >
+      Week {{ weekNumber }}
+    </p>
+    <p style="margin-left: 10px; font-size: 1.2rem">
+      <span [style.color]="week.totalMinutes-requiredMinutes >0 ? '#69f0ae' : '#db5a5a' ">{{
+        week.totalMinutes / 60 | number : "0.1-1"
+      }}</span>
+      <span style="margin-right: 5px;margin-left: 5px;">/</span>
+      <span style="color:rgba(255, 255, 255, 0.7);" >{{requiredMinutes / 60 | number: "0.1-1"}}</span>
+    </p>
+    <div style="display: flex; flex-grow: 1"></div>
+    <p
+    [style.color]="week.totalMinutes-requiredMinutes >0 ? '#69f0ae' : '#db5a5a' "
+      style="
+        margin-right: 10px;
+        font-size: 1.2rem;
+      "
+    >
+      {{ difference | async }}
+    </p>
+  </div>
+</mat-card>

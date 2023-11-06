@@ -1,0 +1,7 @@
+<mat-card style="max-width: 960px; width: 100%;height:200px;padding:50px" FileDragDrop (filesChangeEmiter)="onDragDrop($event)">
+    <div style="display: flex; justify-content: center; align-items: center; width:100%;height:100%; gap: 20px;">
+            <button mat-raised-button color="primary" (click)="file.click()">Select File</button>
+            <span style="color:black;font-size: x-large;"> or Drag it here</span>
+            <input hidden  type="file" name="file" #file (change)="onFileChange($event)" multiple>
+    </div>
+</mat-card>

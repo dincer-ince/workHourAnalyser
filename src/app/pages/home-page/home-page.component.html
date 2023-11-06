@@ -1,0 +1,23 @@
+<mat-card
+  style="
+  min-height: 100%;
+    width: 100%;
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+  "
+>
+  <mat-toolbar class="mat-elevation-z2" color="primary" style="display: flex; justify-content: center;min-height: 50px !important; height: 50px !important;">
+    <div style="max-width: 960px; width: 100%; display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
+        <span>Work Hour Analyser</span>
+        <button mat-icon-button (click)="this.dataService.initUser()"> <mat-icon>add</mat-icon></button>
+    </div>
+  </mat-toolbar>
+
+  <mat-card-content
+    style="max-width: 960px; width: 100%; display: flex; flex-direction: column;padding:0"
+  >
+    <mat-card-subtitle style="margin-top: 20px; margin-bottom: 20px; font-size: 1.5rem;">{{ this.userName | async }}</mat-card-subtitle>
+    <app-month-page></app-month-page>
+  </mat-card-content>
+</mat-card>

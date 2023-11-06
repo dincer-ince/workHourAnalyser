@@ -1,0 +1,5 @@
+<div *ngIf="(month | async) as workMonth" style="width:100%;">
+    <div *ngFor="let week of workMonth.workWeeks; index as i">
+        <app-week [weekNumber]="i+1" [week]="week"></app-week>
+    </div>
+</div>
