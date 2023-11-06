@@ -11,19 +11,25 @@ export class FileInputModalComponent {
   constructor(private excelService:ExcelService){}
   newUser:EventEmitter<User> = new EventEmitter();
 
-  onDragDrop(files:FileList | undefined){
-    console.log(files);
+  async onDragDrop(files:FileList | undefined){
+    if(!files) return;
+    await this.parseFile(files.item(0)!);
   }
 
   async onFileChange(event:any){
     const files:File[] = event.target.files;
+   
+    await this.parseFile(files[0])
+  }
+
+  async parseFile(file:File){
     const parameters = this.excelService.getParameters()[0];
     //TODO: Verification
-    const month =await this.excelService.readExcel(files[0],parameters);
-    const userName = await this.excelService.getUserName(parameters,files[0]);
+    const month =await this.excelService.readExcel(file,parameters);
+    const userName = await this.excelService.getUserName(parameters,file);
     if(month){
       this.newUser.emit({userName:userName,workMonths:[month]});
     }
-    
   }
+
 }

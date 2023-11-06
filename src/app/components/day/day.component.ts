@@ -22,9 +22,7 @@ export class DayComponent implements OnInit {
   }
 
   percentage = this.dataService.requiredMinutes.pipe(map(x=>{
-    const temp = Math.min((this.day.totalMinutes/x *100) -20,100);
-    console.log(temp + "   " + this.day.totalMinutes + "   " + x)
-    return temp
+    return Math.min((this.day.totalMinutes/x *100) -20,100);
   }))
 
 
