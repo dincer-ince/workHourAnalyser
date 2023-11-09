@@ -19,4 +19,12 @@ export class WorkDay {
     this.workPeriods.push(period);
     this.totalMinutes += actualMinutes;
   }
+
+  calculateTotalMinutes(){
+    this.totalMinutes = 0;
+    this.workPeriods.forEach(x=>{
+      this.totalMinutes +=x.minutesWorked;
+    })
+    return this.totalMinutes;
+  }
 }

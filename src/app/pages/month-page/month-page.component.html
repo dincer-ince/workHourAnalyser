@@ -1,5 +1,22 @@
+
 <div *ngIf="(month | async) as workMonth" style="width:100%;">
+    <div style="display: flex; flex-direction: row; flex-wrap: wrap; margin-bottom: 20px;justify-content: space-between; gap:10px; font-size: larger;font-weight: 500;padding:10px">
+        <mat-card >
+            <mat-card-content style="color: #c7c7c7; padding:12px">Month: {{workMonth.nameMonth | date : "MMMM"}}</mat-card-content>
+        </mat-card>
+        <mat-card >
+            <mat-card-content style="color: #c7c7c7; padding:12px">Days Worked: {{workMonth.daysWorked}}</mat-card-content>
+        </mat-card>
+        <mat-card >
+            <mat-card-content style="color: #c7c7c7; padding:12px">Hours Worked: {{workMonth.totalMinutes /60 | number : '0.1-1'}}</mat-card-content>
+        </mat-card>
+        <mat-card > 
+            <mat-card-content style="color: #c7c7c7; padding:12px">Difference: {{this.difference | async}}</mat-card-content>
+        </mat-card>
+        
+    </div>
     <div *ngFor="let week of workMonth.workWeeks; index as i">
         <app-week [weekNumber]="i+1" [week]="week"></app-week>
     </div>
 </div>
+

@@ -36,7 +36,11 @@ export class ExcelService {
       user = rows[parameters.userNameCell.y][parameters.userNameCell.x];
     }
 
-    if (typeof user === 'string') return user;
+    if (typeof user === 'string'){
+      let split = user.split("Kullanıcı Adı: ");
+      if(split.length>1) return split[1];
+      else return split[0];
+    }
     else return undefined;
   }
 
@@ -56,26 +60,26 @@ export class ExcelService {
     const startingRow = parameters.dateStartCell?.y;
 
     let lastDay = new WorkDay();
-
     for (let i = startingRow; i < rows.length; i++) {
       const row = rows[i];
 
       const date = row[parameters.dateStartCell.x];
-      if (date == null) break;
 
-      if (lastDay.date.getTime() != date.getTime()) {
+      if (lastDay.date.getTime() != date.getTime() || i == rows.length - 1) {
         if (lastDay.date.getTime() != new Date(0).getTime()) {
           month.addDay(lastDay);
         }
 
-        lastDay = new WorkDay();
+        i == rows.length - 1 ? lastDay : (lastDay = new WorkDay());
 
         lastDay.date = date;
-        if (parameters.commentCell)
-          lastDay.comment = row[parameters.commentCell.x];
+
         if (parameters.dayNameCell)
           lastDay.dayName = row[parameters.dayNameCell.x];
       }
+
+      if (parameters.commentCell && row[parameters.commentCell.x])
+        lastDay.comment = row[parameters.commentCell.x];
 
       if (parameters.clockInCell && parameters.clockOutCell) {
         lastDay.addPeriod(
@@ -87,6 +91,7 @@ export class ExcelService {
         lastDay.addPeriod(row[parameters.minutesWorkedCell.x]);
       }
     }
+    month.calculateTotalMinutes();
     return month;
   }
 }

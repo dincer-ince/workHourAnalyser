@@ -1,6 +1,9 @@
 <mat-card style="margin-bottom: 20px">
-  <div *ngFor="let day of week.workDays">
-    <app-day [day]="day"></app-day>
+  <div style="position: relative;">
+    <div *ngFor="let day of week.workDays">
+      <app-day [day]="day"></app-day>
+    </div>
+    <div style="position:absolute;height:100%;left:80%;border:0px;border-right: 3px; border-style:dashed;top:0px; border-color: rgba(217, 217, 217, 0.5);"></div>
   </div>
   <mat-divider style="margin-top: 5px; margin-bottom: 10px"></mat-divider>
   <div style="display: flex; gap: 40px" *ngIf="(requiredMinutes | async) as requiredMinutes">

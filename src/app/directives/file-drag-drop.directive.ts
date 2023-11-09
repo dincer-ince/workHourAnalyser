@@ -34,7 +34,6 @@ export class FileDragDropDirective {
     this.background = '#eee';
     this.borderColor = '#696D7D';
     this.borderStyle = '2px dashed';
-    debugger;
     let files = evt.dataTransfer?.files;
     this.filesChangeEmiter.emit(files);
   }

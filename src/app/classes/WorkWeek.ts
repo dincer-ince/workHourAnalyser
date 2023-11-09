@@ -6,6 +6,14 @@ export class WorkWeek {
 
   addWorkDay(day:WorkDay){
     this.workDays.push(day)
-    this.totalMinutes+=day.totalMinutes;
   }
+
+  calculateTotalMinutes(){
+    this.totalMinutes = 0;
+    this.workDays.forEach((x)=>{
+      this.totalMinutes += x.calculateTotalMinutes();
+    })
+    return this.totalMinutes;
+  }
+
 }

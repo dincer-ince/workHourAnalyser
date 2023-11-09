@@ -1,4 +1,4 @@
-<div style="width: 100%; margin-bottom: 10px">
+<div style="width: 100%; margin-bottom: 10px;">
   <div
     [style.color]="(this.percentage | async)! > 80 ? '#7b1fa2' : '#69f0ae'"
     [style.background-color]="
@@ -7,7 +7,11 @@
     [style.width]="(this.percentage | async) + '%'"
     style="border-top-right-radius:15px; border-bottom-right-radius: 15px;height: 40px; align-items: center;display: flex; flex-direction: row;justify-content: space-between;"
   >
-    <span style="margin-left: 5px;font-weight: 500;"><span>{{ (day.date | date : "MMMM d") }}</span><span>{{" "+ day.dayName}}</span></span>
+    <span  style="margin-left: 5px;font-weight: 500;" *ngIf="!day.comment;else commentTemplate"><span >{{ (day.date | date : "MMMM d") }}</span><span>{{" "+ day.dayName}}</span></span>
     <span style="margin-right: 5px;font-weight: 500;">{{minutesStr}}</span>
   </div>
 </div>
+
+<ng-template #commentTemplate>
+  <span style="margin-left: 5px;font-weight: 500;"><span>{{ (day.date | date : "shortDate") }}</span><span style="margin-left: 5px">{{day.comment}}</span></span>
+</ng-template>
